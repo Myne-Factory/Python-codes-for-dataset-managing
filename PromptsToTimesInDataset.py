@@ -1,8 +1,20 @@
 import os
 
-input_folder_path = r'C:\Users\Juuso\Downloads\tags'  # Replace with the actual path to your input folder
+print("---------------------------------------------------------------------\n")
+print("This script creates a prompts list text file in the following format:\n")
+
+print("   tag1                              Times in dataset: 200 (71.2%)")
+print("   tag2                              Times in dataset: 184 (65.6%)")
+print("   tag3                              Times in dataset: 177 (63.0%)\n")
+print("---------------------------------------------------------------------\n")
+
+input_folder_path = input(f"Enter the directory of the prompts: ")  # Replace with the actual path to your input folder
 folder_name = os.path.basename(input_folder_path)
 output_file_path = f'{folder_name} prompt list.txt'  # Replace with the desired path for your output file
+
+def custom_split(text):
+    # Split the text using both comma and asterisk as delimiters
+    return [word.strip() for word in text.replace("*", "* ").split(',')]
 
 def count_words_in_files(input_folder_path, output_file):
     word_counts = {}
@@ -24,11 +36,11 @@ def count_words_in_files(input_folder_path, output_file):
         if filename.endswith(".txt"):
             filepath = os.path.join(input_folder_path, filename)
             with open(filepath, 'r') as file:
-                words = file.read().split(',')
+                # Use custom split function
+                words = custom_split(file.read())
 
                 # Count the occurrences of each word
                 for word in words:
-                    word = word.strip()
                     if word:
                         word_counts[word] = word_counts.get(word, 0) + 1
 

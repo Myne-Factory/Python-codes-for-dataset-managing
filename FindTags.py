@@ -1,5 +1,9 @@
 import os
 
+print("----------------------------------------------------------------------------------\n")
+print("This script looks through a folder and counts the times an input tag is mentioned.\n")
+print("----------------------------------------------------------------------------------\n")
+
 def count_prompt_in_files(prompt, directory):
     prompt = prompt.lower()
     exact_match = 0
